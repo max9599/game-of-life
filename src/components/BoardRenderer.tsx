@@ -13,7 +13,7 @@ const BoardStyled = styled.div`
     right: 0;
     top: 0;
     height: 100vh;
-    width: calc(100vw - 150px);
+    width: calc(100vw - 250px);
     background: rgba(0,0,0,0.01);
     
     canvas {

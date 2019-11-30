@@ -1,5 +1,5 @@
 html, body {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .App {
@@ -27,12 +27,4 @@ html, body {
 
 * {
   box-sizing: border-box;
-}
-
-.input-range__label--min, .input-range__label--max {
-  bottom: -0.8rem;
-}
-
-.input-range__label--value {
-  top: -1.4rem;
 }

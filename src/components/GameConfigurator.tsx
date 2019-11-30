@@ -17,22 +17,22 @@ const ConfigStyled = styled.div`
     left: 0;
     top: 0;
     height: 100vh;
-    width: 150px;
+    width: 250px;
     display: flex;
     flex-direction: column;
-    padding: 12px 16px;
+    padding: 12px 32px 12px 32px;
     background: rgba(0,0,0,0.05);
     box-shadow: 0 0 1px 2px rgba(0,0,0,0.05);
     h2 {
         margin: 0
     }
     > div {
-        margin-top: 1rem;
+        margin-top: 2rem;
         position: relative;
         padding-top: 32px;
     }
     label {
-        font-size: 8px;
+        font-size: 12px;
         font-weight: 500;
         position: absolute;
         bottom: -1rem;
@@ -43,15 +43,11 @@ const ConfigStyled = styled.div`
         text-align: center;
     }
     
-    .input-range__label {
-      font-size: 8px;
-      color: rgba(0,0,0,0.5);
-    }
     
     button {
         margin-top: 3rem;
         font-size: .75rem;
-        padding: .2rem .4rem;
+        padding: .4rem;
         color: white;
         border: 1px solid rgba(0,0,0,0.05);
         cursor: pointer;
@@ -129,7 +125,6 @@ const GameConfigurator: React.FC<GameConfiguratorProps> = ({ game }) => {
                     onChange={onChangeInterval}/>
             </div>
             <div>
-
                 <label>Iterations (total)</label>
                 <InputRange
                     maxValue={10000}

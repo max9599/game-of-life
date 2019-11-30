@@ -4,6 +4,7 @@ import GameConfigurator  from './components/GameConfigurator'
 import Game, { Config } from './game'
 import { GameState } from './game/Game'
 
+import 'normalize.css/normalize.css'
 import 'react-input-range/lib/css/index.css'
 import './App.css'
 
