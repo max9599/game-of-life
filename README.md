@@ -1,4 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Conway's game of life on canvas (React)
+### Demo: https://max9599.github.io/game-of-life/
+
+* UI Configurable parameters like interval, iterations, size, color of alive cells etc
+* Optimized canvas rendering via pixel manipulation
+* Optimized game state computing - 1 dimensional arrays used where possible
+* Optimized game state computing - retrieve neighbour cells status inline instead loop
+* Added some tests with Jest / React testing library and jest-canvas-mock
+
+TODOS:
+* Add possibility to specify initial state (currently it is hardcoded)
+* Add more tests
 
 ## Available Scripts
 
@@ -12,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test`
+### `yarn test`, `yarn test:watch`
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
