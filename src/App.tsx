@@ -27,7 +27,7 @@ const useGame = (config: Config) => {
     const [game, setGame] = useState<GameState>(gameInstance.getGameState())
     const onUpdate = useCallback((g: GameState) => setGame(g), [])
     useEffect(() => {
-            gameInstance.onUpdate(onUpdate).start(true)
+            gameInstance.onUpdate(onUpdate)
             return () => {
                 gameInstance.stop()
             }

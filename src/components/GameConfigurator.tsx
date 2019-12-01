@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { SliderPicker, RGBColor } from 'react-color'
-import InputRange, { Range } from 'react-input-range'
+import { Range } from 'react-input-range'
+import NumericSlider from './NumericSlider'
 import { RGBAType } from '../game/Config'
 import { GameState } from '../game/Game'
 
@@ -92,48 +93,38 @@ const GameConfigurator: React.FC<GameConfiguratorProps> = ({ game }) => {
     return (
         <ConfigStyled>
             <h2>{game.iteration}</h2>
-            <div>
-                <label>Size</label>
-                <InputRange
-                    maxValue={300}
-                    minValue={10}
-                    step={5}
-                    value={config.size}
-                    onChangeComplete={onRestart}
-                    onChange={onChangeSize}/>
-            </div>
-            <div>
-
-                <label>Unit</label>
-                <InputRange ariaLabelledby={'Unit'}
-                            maxValue={30}
-                            minValue={1}
-                            step={1}
-                            value={config.unit}
-                            onChangeComplete={onStart}
-                            onChange={onChangeUnit}/>
-            </div>
-            <div>
-
-                <label>Iteration (ms)</label>
-                <InputRange
-                    maxValue={1000}
-                    minValue={5}
-                    step={1}
-                    value={config.intervalMs}
-                    onChangeComplete={onStart}
-                    onChange={onChangeInterval}/>
-            </div>
-            <div>
-                <label>Iterations (total)</label>
-                <InputRange
-                    maxValue={10000}
-                    minValue={1}
-                    step={1}
-                    value={config.iterations}
-                    onChangeComplete={onStart}
-                    onChange={onChangeIterations}/>
-            </div>
+            <NumericSlider
+                label="Size"
+                maxValue={300}
+                minValue={10}
+                step={5}
+                value={config.size}
+                onChangeComplete={onRestart}
+                onChange={onChangeSize}/>
+            <NumericSlider
+                label={'Unit'}
+                maxValue={30}
+                minValue={1}
+                step={1}
+                value={config.unit}
+                onChangeComplete={onStart}
+                onChange={onChangeUnit}/>
+            <NumericSlider
+                label="Interval (ms)"
+                maxValue={1000}
+                minValue={5}
+                step={1}
+                value={config.intervalMs}
+                onChangeComplete={onStart}
+                onChange={onChangeInterval}/>
+            <NumericSlider
+                label="Iterations total"
+                maxValue={10000}
+                minValue={1}
+                step={1}
+                value={config.iterations}
+                onChangeComplete={onStart}
+                onChange={onChangeIterations}/>
             <div>
                 <SliderPicker onChange={onChangeRGBA} onChangeComplete={onStart}
                               color={rgbaToRGBAColor(config.cellRGBA)}/>

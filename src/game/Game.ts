@@ -14,7 +14,7 @@ export default class Game {
 
     config: Config = new Config()
     iteration: number = 0
-    paused: boolean = false
+    paused: boolean = true
     grid: number[] = []
 
     interval?: number
@@ -22,9 +22,14 @@ export default class Game {
 
     constructor(config: Config) {
         this.config = config
+        this.initGame()
     }
 
     initGame = () => {
+        this.paused = true
+        this.iteration = 0
+        this.grid = []
+        this.config.fillInitialAliveCellsMap()
         const size: number = this.config.size
         for (let i = 0, len = size * size; i < len; i++) {
             this.initXYCell(i)
@@ -33,9 +38,6 @@ export default class Game {
 
     start = (reset?: boolean) => {
         if (reset) {
-            this.iteration = 0
-            this.grid = []
-            this.config.fillInitialAliveCellsMap()
             this.initGame()
         }
         this.paused = false
@@ -60,7 +62,11 @@ export default class Game {
         this.start(true)
     }
 
-    private tick = () => {
+    tick = () => {
+        if (this.iteration >= this.config.iterations) {
+            this.stop()
+            return
+        }
         this.iteration++
         const grid = []
         for (let i = 0, gridLen = this.grid.length; i < gridLen; i++) {
@@ -69,9 +75,6 @@ export default class Game {
         }
         this.grid = grid
         this.doUpdate()
-        if (this.iteration >= this.config.iterations) {
-            this.stop()
-        }
     }
 
     doUpdate = () => {

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BoardRenderer /> should render board with initial state of game 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 100,
+      "width": 100,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "createImageData",
+  },
+  Object {
+    "props": Object {
+      "dirtyHeight": NaN,
+      "dirtyWidth": NaN,
+      "dirtyX": NaN,
+      "dirtyY": NaN,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "putImageData",
+  },
+]
+`;

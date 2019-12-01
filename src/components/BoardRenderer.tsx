@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { GameState } from '../game/Game'
 
-type BoardRendererProps = {
+export type BoardRendererProps = {
     game: GameState
 }
 
@@ -27,7 +27,6 @@ const BoardRenderer: React.FC<BoardRendererProps> = ({ game }) => {
     const { unit, size, cellRGBA } = config
     const canvasElement = useRef<HTMLCanvasElement>(null)
     const sizeInPixel = size * unit
-
     useEffect(() => {
         if (canvasElement.current) {
             const canvas = canvasElement.current
@@ -55,7 +54,7 @@ const BoardRenderer: React.FC<BoardRendererProps> = ({ game }) => {
         }
     })
 
-    return <BoardStyled>
+    return <BoardStyled data-testid="board-renderer">
         <canvas ref={canvasElement}
                 width={sizeInPixel}
                 height={sizeInPixel}/>

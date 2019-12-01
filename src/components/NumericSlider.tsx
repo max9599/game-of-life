@@ -5,7 +5,7 @@ type NumericSliderProps = InputRangeProps & {
     label: string
 }
 
-const NumericSlider: React.FC<NumericSliderProps> = ({label, ...props}) => (
+const NumericSlider: React.FC<NumericSliderProps> = ({ label, ...props }) => (
     <div>
         <label>{label}</label>
         <InputRange
