@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { GameState } from '../game/Game'
 
@@ -6,7 +6,9 @@ export type BoardRendererProps = {
     game: GameState
 }
 
-const BoardStyled = styled.div`
+export type BoardRendererStyledProps = { paused: boolean }
+
+const BoardStyled = styled.div<BoardRendererStyledProps>`
     position: absolute;
     overflow: auto;
     max-height: 100vh;
@@ -19,14 +21,23 @@ const BoardStyled = styled.div`
     canvas {
         border: 1px solid rgba(0,0,0,.05);
         background: rgba(0,0,0,0.0§);
+        cursor: ${props => props.paused ? 'pointer' : 'default'};
     }
 `
 
 const BoardRenderer: React.FC<BoardRendererProps> = ({ game }) => {
-    const { grid, config } = game
+    const { grid, config, paused, toggleCellState } = game
     const { unit, size, cellRGBA } = config
     const canvasElement = useRef<HTMLCanvasElement>(null)
     const sizeInPixel = size * unit
+    const onCellToggle = useCallback((event) => {
+        if (paused && canvasElement.current) {
+            const rect = canvasElement.current.getBoundingClientRect()
+            const x = event.clientX - rect.left
+            const y = event.clientY - rect.top
+            toggleCellState(~~(x/unit) + ~~(y/unit)*size)
+        }
+    }, [size, unit, paused, toggleCellState])
     useEffect(() => {
         if (canvasElement.current) {
             const canvas = canvasElement.current
@@ -54,8 +65,9 @@ const BoardRenderer: React.FC<BoardRendererProps> = ({ game }) => {
         }
     })
 
-    return <BoardStyled data-testid="board-renderer">
+    return <BoardStyled data-testid="board-renderer" paused={paused}>
         <canvas ref={canvasElement}
+                onClick={onCellToggle}
                 width={sizeInPixel}
                 height={sizeInPixel}/>
     </BoardStyled>

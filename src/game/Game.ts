@@ -8,6 +8,8 @@ export interface GameState {
     start: any
     stop: any
     restart: any
+    reset: any
+    toggleCellState: any
 }
 
 export default class Game {
@@ -44,6 +46,12 @@ export default class Game {
         this.interval = setInterval(this.tick, this.config.intervalMs)
         this.tick()
         return this
+    }
+
+    reset = () => {
+        this.stop()
+        this.initGame()
+        this.doUpdate()
     }
 
     onUpdate = (doAction: (state: GameState) => void) => {
@@ -91,7 +99,14 @@ export default class Game {
         start: this.start,
         stop: this.stop,
         restart: this.restart,
+        reset: this.reset,
+        toggleCellState: this.toggleCellState,
     })
+
+    toggleCellState = (pos: number) => {
+        this.grid[pos] = this.grid[pos] === 1 ? 0 : 1
+        this.doUpdate()
+    }
 
     private getTotalAliveNeighbours = (pos: number): number => {
         const { size } = this.config

@@ -49,17 +49,36 @@ const ConfigStyled = styled.div`
         margin-top: 3rem;
         font-size: .75rem;
         padding: .4rem;
+        height: 2rem;
         color: white;
         border: 1px solid rgba(0,0,0,0.05);
         cursor: pointer;
-        &.stop {
+        &.paused {
             background: #ff3e5b;
         }
         &.start {
             background: #3e51b5;
             &.re {
                 margin-top: .5rem;
+                margin-bottom: .5rem;
             }
+        }
+        &.reset {
+            border: 1px solid rgba(0,0,0,0.15);
+            background: white;
+            color: black;
+        }
+    }
+    
+    .helper {
+        font-size: .7rem;
+        color: gray;
+        transition: all .3s ease-in-out;
+        visibility: hidden;
+        opacity: 0;
+        &.paused {
+            visibility: visible;
+            opacity: 1;
         }
     }
 `
@@ -69,6 +88,10 @@ const GameConfigurator: React.FC<GameConfiguratorProps> = ({ game }) => {
     const { paused } = game
     const onRestart = useCallback(() => game.restart(), [game])
     const onStart = useCallback(() => game.start(), [game])
+    const onReset = useCallback(() => {
+        game.stop()
+        game.reset()
+    }, [game])
     const onStop = useCallback(() => game.stop(), [game])
     const onChangeSize = useCallback((value: number | Range) => {
         game.stop()
@@ -129,9 +152,11 @@ const GameConfigurator: React.FC<GameConfiguratorProps> = ({ game }) => {
                 <SliderPicker onChange={onChangeRGBA} onChangeComplete={onStart}
                               color={rgbaToRGBAColor(config.cellRGBA)}/>
             </div>
-            <button className={paused ? 'start' : 'stop'}
-                    onClick={paused ? onStart : onStop}>{paused ? 'Start' : 'Stop'}</button>
+            <button className={paused ? 'start' : 'paused'}
+                    onClick={paused ? onStart : onStop}>{paused ? 'Start' : 'Pause'}</button>
             <button className="re start" onClick={onRestart}>Restart</button>
+            <span className={`helper ${paused ? 'paused' : ''}`}>Click on canvas to toggle cell state</span>
+            <button className="reset" onClick={onReset}>Reset</button>
         </ConfigStyled>
     )
 }

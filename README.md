@@ -6,10 +6,7 @@
 * Optimized game state computing - 1 dimensional arrays used where possible
 * Optimized game state computing - retrieve neighbour cells status inline instead loop
 * Added some tests with Jest / React testing library and jest-canvas-mock
-
-TODOS:
-* Add possibility to specify initial state (currently it is hardcoded)
-* Add more tests
+* Toggle cell state by click event on canvas board in paused state
 
 ## Available Scripts
 
